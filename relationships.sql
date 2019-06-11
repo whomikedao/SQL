@@ -32,7 +32,7 @@
 -- SELECT * FROM article, author WHERE article.author_id = author.id;
 -- -- THESE TWO ARE THE SAME BUT MAKE SURE YOU'RE USING THE AUTHOR ID OF THE ARTICLE TABLE TO MATCH THE AUTHOR ID OF THE AUTHOR TABLE
 -- -- INNER JOIN EXAMPLE
--- SELECT * FROM article INNER JOIN author ON article.author_id = author.id
+-- SELECT * FROM article INNER JOIN author ON article.author_id = author.id;
 
 -- INSERT INTO article VALUES (DEFAULT, 'Hagrid Cant Produce a Patronus', 1),
 -- (DEFAULT, 'Dumbledore is Death', 2),
@@ -50,16 +50,16 @@
 -- SELECT * FROM article RIGHT OUTER JOIN author ON aritcle.author_id = author.id;
 
 --HOW MANY ARTICLES HAS EACH AUTHOR WRITTEN?
--- SELECT --THIS SHOWS WHAT TO PUT ON THE SELECTED VIEW TABLE
---     author.id, 
---     author.name, 
---     count(article.id) 
--- FROM 
---     article
--- INNER JOIN --USING INNER JOIN TO SHOW THE MIDDLE OF THE TWO COMPARISON CIRCLES
---     author ON article.author_id = author.id
--- GROUP BY --USES THE COUNT TO GROUP BY AUTHOR.ID SINCE IT'S EASIER TO USE ID TO GROUP THAN THEIR NAMES
---     author.id;
+SELECT --THIS SHOWS WHAT TO PUT ON THE SELECTED VIEW TABLE
+    author.id, 
+    author.name, 
+    count(article.id) 
+FROM 
+    article
+INNER JOIN --USING INNER JOIN TO SHOW THE MIDDLE OF THE TWO COMPARISON CIRCLES
+    author ON article.author_id = author.id
+GROUP BY --USES THE COUNT TO GROUP BY AUTHOR.ID SINCE IT'S EASIER TO USE ID TO GROUP THAN THEIR NAMES
+    author.id;
 
 -- CREATE TABLE groups(
 --     id serial PRIMARY KEY,
@@ -103,4 +103,4 @@
 -- (DEFAULT, 4, 6);
 
 
-SELECT * FROM groups INNER JOIN membership ON groups_id = membership.group_id;
+-- SELECT * FROM groups INNER JOIN membership ON groups_id = membership.group_id;
