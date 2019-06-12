@@ -1,0 +1,1 @@
+sequelize model:generate --name task --attributes title:string
