@@ -60,9 +60,59 @@ let user = db.user; //now we don't have to constantly type db.user
 // user.findAll({where: {}, include: [], order: [], limit: 2,}) //these are different keyvalue pairs that you can use
 //IF YOU ADD OFFSET, SHIFTS THIS DOWN BY OFFSET INTEGER
 //ORDER TAKES AN ARRAY WITHIN AN ARRAY
-user.findAll({order: [['lastName', 'ASC']]}) 
-.then((result) => {
-    result.forEach(record =>{
-        console.log(record.firstName, record.lastName);
+// user.findAll({order: [['lastName', 'ASC']]}) 
+// .then((result) => {
+//     result.forEach(record =>{
+//         console.log(record.firstName, record.lastName);
+//     })
+// })
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ASSOCIATIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//NEED TO CREATE ANOTHER TABLE
+//TO DO THAT YOU NEED TO RUN THE SEQUELIZE GENERATE MODEL COMMAND
+    //sequelize model:generate --name (name of file) --attributes title:string(add attributes without space)
+//THEN IT SHOULD MAKE A NEW JS FILE IN MODELS
+//IN THE JS FILE, ALL THE ASSOCIATIONS CAN BE FOUND UNDER "task.associate"
+//EDIT YOUR MIGRATIONS FILE. IE. CREATE-TASKS
+//WHICH WE ADDED:
+// userId: {
+//     type: Sequelize.INTEGER,
+//     references: {
+//       model: 'users', ////THIS REFERENCES THE USERS TABLE WITH THE KEY OF THEIR ID
+//       key: 'id'
+//     },
+//     allowNull: true
+//   }
+//THEN RUN MIGRATE
+    //sequelize db:migrate
+
+
+// user.findAll({include: [{model: db.task}]})
+// .then((records) => {
+//     records.forEach(record=>{
+//         console.log(record.firstName, record.lastName);
+//         record.tasks.forEach(element=>{
+//             console.log(`   >${element.title}`);
+//         })
+//     })
+// })
+
+// user.findAll({include: [{model: db.task, require: false}]})
+// .then((records) => {
+//     records.forEach(record => {
+//         console.log(record.firstName, record.lastName);
+//         record.tasks.forEach(element => {
+//             console.log(` >${element.title}`);
+//         });
+//     });
+// })
+
+db.task.findAll({include: [{model: db.user, require: false, where: {id: 2}}]})
+.then((records) => {
+    records.forEach(record=>{
+        console.log(record.title, record.user.firstName);
     })
 })
+
+//include is an array
+    //you can put other key value pairs in it
