@@ -270,10 +270,10 @@
 -- WHERE project_id IS NULL;
 
 -- Based on the previous query, get the count of the number of techs used by each project.
--- SELECT project.id, project.name, count(tech_id)
--- FROM project
--- LEFT OUTER JOIN project_uses_tech on project.id = project_uses_tech.project_id 
--- GROUP BY project.id;
+-- SELECT tech.id, tech.name, count(project_id)
+-- FROM tech
+-- LEFT OUTER JOIN project_uses_tech on tech.id = project_uses_tech.tech_id 
+-- GROUP BY tech.id;
 
 
 -- Perform a left outer join from the project table to the project_users_tech table - which projects has no associated tech?
@@ -283,14 +283,29 @@
 -- WHERE tech_id IS NULL;
 
 -- Based on the previous query, get the count of the number of projects that use each tech.
-SELECT project.id, project.name, tech_id 
-FROM project 
-LEFT OUTER JOIN project_uses_tech ON project.id = project_uses_tech.project_id
-GROUP BY tech_id;
+-- SELECT project.id, project.name, count(project_uses_tech.project_id)
+-- FROM project
+-- LEFT OUTER JOIN project_uses_tech ON project.id = project_uses_tech.project_id
+-- GROUP BY project.id;
 
 -- List all projects along with each technology used by it. You will need to do a three-way join.
+-- SELECT * FROM project
+-- JOIN project_uses_tech ON project.id = project_uses_tech.project_id 
+-- JOIN tech ON project_uses_tech.tech_id = tech.id;
+
 -- List all the distinct techs that are used by at least one project.
+
+-- SELECT DISTINCT(tech.name) 
+-- FROM project 
+-- INNER JOIN project_uses_tech ON project_uses_tech.project_id = project.id 
+-- INNER JOIN tech ON project_uses_tech.tech_id = tech.id;
+
 -- List all the distinct techs that are not used by any projects.
+SELECT DISTINCT(tech.name) 
+FROM project 
+INNER JOIN project_uses_tech ON project_uses_tech.project_id = project.id 
+INNER JOIN tech ON project_uses_tech.tech_id = tech.id;
+
 -- List all the distinct projects that use at least one tech.
 -- List all the distinct projects that use no tech.
 -- Order the projects by how many tech it uses.

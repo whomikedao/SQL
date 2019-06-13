@@ -89,4 +89,4 @@
 
 -- ALTER TABLE articles ADD last_name varchar;
 
-ALTER TABLE student2 MODIFY COLUMN gender varchar(4);
+-- ALTER TABLE student2 MODIFY COLUMN gender varchar(4);

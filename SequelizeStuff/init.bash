@@ -1,1 +1,4 @@
-sequelize model:generate --name task --attributes title:string
+#CREATING A NEW TABLE
+sequelize model:generate --name test --attributes title:string
+
+# sequelize migration:create --name addColumnTask

@@ -116,3 +116,5 @@ db.task.findAll({include: [{model: db.user, require: false, where: {id: 2}}]})
 
 //include is an array
     //you can put other key value pairs in it
+
+
